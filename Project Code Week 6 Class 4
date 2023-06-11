@@ -209,7 +209,7 @@ h3 {
     </form>
     <button class="locationButton">Current location</button>
 
-    <script src="src/index.js"></script>
+    <script src="index.js"></script>
   </body>
   <script>
 function showCity(event) {
