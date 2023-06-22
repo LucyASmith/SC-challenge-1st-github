@@ -30,16 +30,18 @@
     <link rel="stylesheet" href="styles.css">
    <style>
    h1,
-h2,
-h3 {
-  color: turquoise;
-  font-family: "DM Sans", sans-serif;
-  text-align: center;
-}
-h3 {
-  padding-bottom: 0px;
-  margin: 0px;
-}
+h2 {
+        color: turquoise;
+        font-family: "DM Sans", sans-serif;
+        text-align: center;
+      }
+      h3 {
+        color: aquamarine;
+        font-family: "DM Sans", sans-serif;
+        text-align: center;
+        padding-bottom: 0px;
+        margin: 0px;
+      }
 .col {
   font-family: "DM Sans", sans-serif;
 }
@@ -112,13 +114,22 @@ h3 {
   <body>
     <div class="container">
       <h1 class="City" id="cityName">Barcelona</h1>
-      <h2>Right now</h2>
+      <h2>
+        Right now
+        <img src="https://openweathermap.org/img/wn/10d@2x.png" id="icon" />
+      </h2>
       <h3>
-        🌞 <span id="tempNumber"> 24 </span
-        ><a href="#" class="tempCels" id="tempCels">°C</a> /
+        <span id="tempNumber"> 24 </span>
+        <a href="#" class="tempCels" id="tempCels">°C</a> /
         <a href="#" class="tempinFahr" id="tempinFahr">°F</a>
       </h3>
-      <div class="currentDate" id="currentDate">Date and time</div>
+      <h3>Wind speed: <span id="currentSpeed"></span></h3>
+      <h3 id="weatherDescription">Description</h3>
+
+      <div>
+        Last updated
+        <span class="currentDate" id="currentDate">Date and time</span>
+      </div>
       <i class="fa-solid fa-leaf leaficon"></i>
 
       <div class="grid">
@@ -233,6 +244,15 @@ function cityTemp(response) {
   event.preventDefault();
   let tempNumber = document.querySelector("#tempNumber");
   tempNumber.innerHTML = Math.round(response.data.main.temp);
+  let descriptionElement = document.querySelector("#weatherDescription");
+      descriptionElement.innerHTML = `${response.data.weather[0].main}`;
+      let speedElement = document.querySelector("#currentSpeed");
+      speedElement.innerHTML = `${response.data.wind.speed}`;
+      let iconElement = document.querySelector("#icon");
+      iconElement.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      );
 }
 function showPosition(position) {
   let apiKey = "6bfa54f242cbb59343d4e58db578dc61";
