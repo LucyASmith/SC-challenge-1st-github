@@ -141,13 +141,13 @@ h2 {
         </div>
 
         <div class="row" class="today-weather">
-          <div class="col-3">Monday (Today)</div>
+          <div class="col-3">Monday </div>
           <div class="col-3">🌞</div>
           <div class="col-3">27°C</div>
           <div class="col-3">18°C</div>
         </div>
         <div class="row" class="tomorrow-weather">
-          <div class="col-3">Tuesday (Tomorrow)</div>
+          <div class="col-3">Tuesday </div>
           <div class="col-3">🌞</div>
           <div class="col-3">26°C</div>
           <div class="col-3">18°C</div>
@@ -243,7 +243,8 @@ function showCity(event) {
 function cityTemp(response) {
   event.preventDefault();
   let tempNumber = document.querySelector("#tempNumber");
-  tempNumber.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+  tempNumber.innerHTML = Math.round(celsiusTemp);
   let descriptionElement = document.querySelector("#weatherDescription");
       descriptionElement.innerHTML = `${response.data.weather[0].main}`;
       let speedElement = document.querySelector("#currentSpeed");
@@ -279,6 +280,8 @@ form.addEventListener("submit", showCity);
 let locationButton = document.querySelector(".locationButton");
 locationButton.addEventListener("click", getPos);
 
+let celsiusTemp = null;
+    
 let now = new Date();
 
 function showDate() {
@@ -329,7 +332,8 @@ showDate();
 function showFahr(event) {
   event.preventDefault();
   let tempNumber = document.querySelector("#tempNumber");
-  tempNumber.innerHTML = "75 ";
+  let FahrTemp = (celsiusTemp * 9) / 5 + 32;
+  tempNumber.innerHTML = Math.round(FahrTemp);
 }
 
 let tempF = document.querySelector("#tempinFahr");
@@ -338,7 +342,7 @@ tempF.addEventListener("click", showFahr);
 function showCelsius(event) {
   event.preventDefault();
   let tempNumber = document.querySelector("#tempNumber");
-  tempNumber.innerHTML = "24 ";
+  tempNumber.innerHTML = Math.round(celsiusTemp);
 }
 
 let tempC = document.querySelector("#tempCels");
