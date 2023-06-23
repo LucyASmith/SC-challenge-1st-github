@@ -113,7 +113,7 @@ h2 {
   </head>
   <body>
     <div class="container">
-      <h1 class="City" id="cityName">Barcelona</h1>
+      <h1 class="City" id="cityName">Tell me a city or press Current Location</h1>
       <h2>
         Right now
         <img src="https://openweathermap.org/img/wn/10d@2x.png" id="icon" />
@@ -268,8 +268,18 @@ function showTemp(response) {
   event.preventDefault();
   let cityName = document.querySelector("#cityName");
   let tempNumber = document.querySelector("#tempNumber");
-  tempNumber.innerHTML = Math.round(response.data.main.temp);
-  cityName.innerHTML = `${response.data.name}`;
+      celsiusTemp = response.data.main.temp;
+      tempNumber.innerHTML = Math.round(celsiusTemp);
+      cityName.innerHTML = `${response.data.name}`;
+      let descriptionElement = document.querySelector("#weatherDescription");
+      descriptionElement.innerHTML = `${response.data.weather[0].main}`;
+      let speedElement = document.querySelector("#currentSpeed");
+      speedElement.innerHTML = `${response.data.wind.speed}`;
+      let iconElement = document.querySelector("#icon");
+      iconElement.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      );
 }
 function getPos(position) {
   navigator.geolocation.getCurrentPosition(showPosition);
